@@ -1,0 +1,62 @@
+@@ -1,66 +1,61 @@
+---	---
+layout: default	layout: default
+---	---
+<div class="home">	<div class="home">
+  {%- if page.title -%}	  {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>	    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}	  {%- endif -%}
+  {{ content }}	  {{ content }}
+  {% if site.paginate %}	  {% if site.paginate %}
+    {% assign posts = paginator.posts %}	    {% assign posts = paginator.posts %}
+  {% else %}	  {% else %}
+    {% assign posts = site.posts %}	    {% assign posts = site.posts %}
+  {% endif %}	  {% endif %}
+  {%- if posts.size > 0 -%}	  {%- if posts.size > 0 -%}
+    {%- if page.list_title -%}	    {%- if page.list_title -%}
+      <h2 class="post-list-heading">{{ page.list_title }}</h2>	      <h2 class="post-list-heading">{{ page.list_title }}</h2>
+    {%- endif -%}	    {%- endif -%}
+    <ul class="post-list">	    <ul class="post-list">
+      {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}	      {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+      {%- for post in posts -%}	      {%- for post in posts -%}
+      <li>	      <li>
+        <span class="post-meta">{{ post.date | date: date_format }}</span>	        <span class="post-meta">{{ post.date | date: date_format }}</span>
+        <h3>	        <h3>
+          <a class="post-link" href="{{ post.url | relative_url }}">	          <a class="post-link" href="{{ post.url | relative_url }}">
+            {{ post.title | escape }}	            {{ post.title | escape }}
+          </a>	          </a>
+        </h3>	        </h3>
+        {%- if site.show_excerpts -%}	        {%- if site.show_excerpts -%}
+          {{ post.excerpt }}	          {{ post.excerpt }}
+        {%- endif -%}	        {%- endif -%}
+      </li>	      </li>
+      {%- endfor -%}	      {%- endfor -%}
+    </ul>	    </ul>
+    {% if site.paginate %}	    {% if site.paginate %}
+      <div class="pager">	      <div class="pager">
+        <ul class="pagination">	        <ul class="pagination">
+        {%- if paginator.previous_page %}	        {%- if paginator.previous_page %}
+          <li><a href="{{ paginator.previous_page_path | relative_url }}" class="previous-page">{{ paginator.previous_page }}</a></li>	          <li><a href="{{ paginator.previous_page_path | relative_url }}" class="previous-page">{{ paginator.previous_page }}</a></li>
+        {%- else %}	        {%- else %}
+          <li><div class="pager-edge">•</div></li>	          <li><div class="pager-edge">•</div></li>
+        {%- endif %}	        {%- endif %}
+          <li><div class="current-page">{{ paginator.page }}</div></li>	          <li><div class="current-page">{{ paginator.page }}</div></li>
+        {%- if paginator.next_page %}	        {%- if paginator.next_page %}
+          <li><a href="{{ paginator.next_page_path | relative_url }}" class="next-page">{{ paginator.next_page }}</a></li>	          <li><a href="{{ paginator.next_page_path | relative_url }}" class="next-page">{{ paginator.next_page }}</a></li>
+        {%- else %}	        {%- else %}
+          <li><div class="pager-edge">•</div></li>	          <li><div class="pager-edge">•</div></li>
+        {%- endif %}	        {%- endif %}
+        </ul>	        </ul>
+      </div>	      </div>
+    {%- endif %}	    {%- endif %}
+
+
+    <p class="feed-subscribe">	
+      <a href="{{ 'feed.xml' | relative_url }}">	
+        <svg class="svg-icon orange"><use xlink:href="{{ 'assets/minima-social-icons.svg#rss' | relative_url }}"></use></svg><span>Subscribe</span>	
+      </a>	
+    </p>	
+  {%- endif -%}	  {%- endif -%}
+
+
+</div>	</div>
